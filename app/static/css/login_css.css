@@ -1,0 +1,142 @@
+.overlay {
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(250, 248, 248, 0.6);
+    padding: 10px;
+    text-align: center;
+    max-width: 888px;
+}
+
+.nickname {
+    left: 50px;
+}
+
+.example {
+    width: 50%;
+}
+
+.examples {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.example img {
+    cursor: pointer;
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px;
+}
+
+.example img:hover {
+    opacity: 0.8;
+}
+
+.checkbox {
+    float: none;
+    margin-left: 10px;
+    margin-right: 90px;
+}
+
+.button {
+    margin-left: 10px;
+    margin-right: 60px;
+}
+
+.location {
+    height: 100px;
+    width: 888px;
+    background-color: rgba(100, 120, 240, 0.2);
+    border-radius: 30px;
+}
+
+.edu {
+    margin-left: 20px;
+    margin-top: 8px;
+    float: left;
+    text-align: center;
+}
+
+a {
+    color: #e0b2d9;
+}
+
+.logo {
+    width: 210px;
+    height: 70px;
+    overflow: hidden;
+    padding-left: 40px;
+    margin-top: -15px;
+    padding-bottom: 5px;
+}
+
+.userimg {
+    height: 40px;
+    width: 40px;
+    margin-right: 40px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+.navbar .navbar-default {
+    height: 40px;
+    padding-bottom: -20px;
+}
+
+.nav .navbar-nav {
+    position: relative;
+    height: 30px;
+    padding-top: 20px;
+    background-color: #ffffff00;
+    border: 1px solid transparent;
+}
+
+.dropdown .dropdown-menu .li {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 140PX;
+    width: 100px;
+    font-size: 40px;
+    color: #802b4e;
+    background: #d32c71;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    text-transform: capitalize;
+}
+
+.page-footer {
+    background: #802b4e33;
+    color: #802b4e;
+    padding: 50px 0, 0;
+    height: 55px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 5px 0 0;
+}
+
+.navbar {
+    font-size: 15pt;
+    min-height: 70px;
+    margin-top: auto;
+    margin-bottom: auto;
+    border: 1px solid transparent;
+    background-color: #ffffff98;
+}
+
+.nav-header .brand-img {
+    width: 300px;
+    height: 40px;
+    overflow: hidden;
+    padding-left: 40px;
+    padding-top: 0px;
+}

@@ -1,0 +1,253 @@
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2e2d2d;
+    font-variant: tabular-nums;
+    background-color: #fff;
+    line-height: 1.5715;
+    width: 100%;
+}
+
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    width: 100%;
+}
+
+a {
+    color: #000000;
+    text-decoration: underline;
+    text-decoration-color: #B1B1B1;
+}
+
+*:focus,
+button:focus {
+    outline: none;
+}
+
+.logo {
+    width: 300px;
+    height: 40px;
+    overflow: hidden;
+    padding-left: 40px;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 1px;
+    background-color: #ffffff00;
+    border: 1px solid transparent;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul {
+    padding: 0 0 0 20px;
+}
+
+dl,
+ol,
+ul {
+    margin-bottom: 1rem;
+}
+
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+    padding-left: 1.5em;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+
+/*居中*/
+
+.search-full-form .search-icon {
+    position: absolute;
+    left: 200px;
+    bottom: 0;
+}
+
+.header-navigation {
+    padding-bottom: 0;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.header-navigation .nav-item {
+    position: relative;
+}
+
+.navbar-header .brand-img {
+    padding: 5px 5px 5px 5px;
+}
+
+.nav-header .brand-img {
+    width: 300px;
+    height: 40px;
+    overflow: hidden;
+    padding-left: 40px;
+}
+
+.page-footer {
+    background: #e41f1f;
+    color: #8f1fcf;
+    padding: 50px 0 0;
+}
+
+.page-footer {
+    background: #e41f1f;
+    color: #8f1fcf;
+    padding: 50px 0 0;
+}
+
+
+/*1280*60*/
+
+.studio-container {
+    width: 100%;
+    min-width: 1280px;
+    height: 60px;
+    box-sizing: border-box;
+    padding: 0 10px 0 30px;
+    font-size: 0
+}
+
+.studio-container-item {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 14px;
+    font-size: 14px;
+    text-align: center;
+    color: rgb(33, 183, 243);
+    line-height: 60px;
+    position: relative
+}
+
+.studio-container-item:hover .studio-container-item-dp {
+    display: block
+}
+
+.studio-container-item.is-more:hover {
+    background-color: rgb(214, 131, 21);
+    color: rgb(139, 11, 11)
+}
+
+.studio-container-item-right {
+    float: right
+}
+
+.studio-container-item:hover {
+    color: #dd1dc3;
+    background: #941a1a
+}
+
+.studio-container-item-active {
+    color: #c50f0f;
+    background: rgba(4, 168, 67, 0.1)
+}
+
+.studio-container-item-primary:hover {
+    color: rgb(21, 204, 21)
+}
+
+.studio-container-item-en {
+    margin-left: 10px
+}
+
+.studio-container-item-dp {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    min-width: 100%;
+    padding: 8px 0;
+    background-color: rgb(219, 55, 55);
+    color: rgb(23, 69, 221);
+    list-style: none;
+    text-align: left
+}
+
+.studio-container-item-dp-item a {
+    display: block;
+    padding: 0 20px;
+    height: 48px;
+    line-height: 48px;
+    color: #fff;
+    white-space: nowrap
+}
+
+.studio-container-item-dp-item a.is-active,
+.studio-container-item-dp-item a:hover {
+    background-color: #be3939;
+    color: #e29403
+}
+
+.studio-container-item.is-more:hover {
+    background-color: #fff;
+    color: rgb(241, 90, 221)
+}
+
+.form-container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70PX;
+}
+
+.form-horizontal .form-control {
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffffff;
+    border: none;
+    border-radius: 20px;
+    box-shadow: none;
+    padding: 0 20px 0 45px;
+    height: 40px;
+    width: 260px;
+    transition: all 0.3s ease 0s;
+}
+
+.form-horizontal .form-control:focus {
+    background: #d32c71;
+    box-shadow: none;
+    outline: 0 none;
+}
+
+.form-horizontal .btn {
+    width: 260px;
+    font-size: 14px;
+    color: #fff;
+    background: #d32c71;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    text-transform: capitalize;
+    transition: all 0.5s ease 0s;
+}
+
+.page-header-reg {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 140PX;
+    width: 150px;
+    font-size: 30px;
+    color: #fff;
+    background: #d32c71;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    text-transform: capitalize;
+}

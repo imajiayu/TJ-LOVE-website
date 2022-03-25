@@ -1,0 +1,117 @@
+.overlay {
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(250, 248, 248, 0.6);
+    padding: 10px;
+    height: 400px;
+    max-width: 888px;
+}
+
+.overlay h3 {
+    font: 24px;
+}
+
+.email {
+    height: 40px;
+    background-color: cornflowerblue;
+}
+
+.examples {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.example {
+    width: 50%;
+}
+
+.examples {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.example img {
+    cursor: pointer;
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px;
+}
+
+.example img:hover {
+    opacity: 0.8;
+}
+
+.checkbox {
+    float: none;
+    margin-left: 10px;
+    margin-right: 90px;
+}
+
+.button {
+    margin-left: 10px;
+    margin-right: 60px;
+}
+
+.button2 {
+    margin-left: 260px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.location {
+    height: 100px;
+    width: 888px;
+    background-color: rgba(100, 120, 240, 0.2);
+    border-radius: 30px;
+}
+
+.education {
+    height: 100px;
+    width: 888px;
+    background-color: rgba(218, 141, 205, 0.2);
+    border-radius: 30px;
+}
+
+#inputinfo3 {
+    border: none;
+    width: 200px;
+    margin-left: 112px;
+    margin-top: 1px;
+    background-color: rgba(218, 141, 205, 0.3);
+}
+
+#inputinfo2 {
+    border: none;
+    width: 200px;
+    background-color: rgba(218, 141, 205, 0.3);
+}
+
+#inputinfo1 {
+    border: none;
+    width: 200px;
+    margin-left: 112px;
+    margin-top: 1px;
+    background-color: rgba(100, 120, 240, 0.3);
+}
+
+#inputinfo0 {
+    border: none;
+    width: 200px;
+    background-color: rgba(100, 120, 240, 0.3);
+}
+
+.edu {
+    margin-left: 20px;
+    margin-top: 8px;
+    float: left;
+    text-align: center;
+}
+
+a {
+    color: #e0b2d9;
+}
