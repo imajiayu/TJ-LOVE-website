@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block title %}发送信息{% endblock %} {% block head %}
+<link rel="stylesheet" href="../static/css/receive_message.css">
+<link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.png') }}" type="image/x-icon">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../static/css/style.css"> {% endblock %} {% block content %}
+
+<div class="overlay" style="background-color: rgba(236, 173, 173,0.5);">
+
+    <div class="examples">
+        <div style="width: 100px;"><img src="{{url_for('static',filename=user.main_image_url)}}" height=80px width=80px;> </div>
+        <div style="width: 100px;margin-top: -80px;margin-left: 100px;">
+            <h3>收件人：{{user.nickname}}</h3>
+        </div>
+        <div class="content">
+            <form action="{{url_for('message.send_message',recipe_id=recipe_id)}}" method="post" name="email_content">
+                <div><br></div>
+                <input type="text" style="height:200px; width:800px;background-color: rgba(196, 115, 169, 0.3);" name="message_body" placeholder="请在此处输入消息">
+                <div>
+                    <br>
+                </div>
+                <div class="button2 form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default" style="margin-left: -140px;">发送</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="../static/js/bubbly-bg.js"></script>
+<script>
+    bubbly();
+    let configs = [{}, {
+        colorStart: "#fff4e6",
+        colorStop: "#ffe9e4",
+        bubbleFunc: () => `hsla(0, 100%, 50%, ${Math.random() * 0.25})`
+    }];
+    document.addEventListener("click", function(e) {
+        if (e.target.hasAttribute("data-config-nr")) {
+            document.body.removeChild(document.querySelector("canvas"));
+            bubbly(configs[e.target.getAttribute("data-config-nr")]);
+        }
+    });
+</script>
+{% endblock %}

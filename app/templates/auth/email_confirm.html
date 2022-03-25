@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block title %} 未认证 {% endblock %}{% block content %}
+
+    <div class="overlay">
+        <div style="font-size:50px; color:rgb(223, 130, 173);">您的邮箱还未认证
+            <br>请前往认证!</div>
+        <div style=" font-size:14px; color:rgb(224, 142, 180);">
+            <a href="{{url_for('auth.resend_confirmation')}}">未收到邮件，点击此处再发一封</a></div>
+    </div>
+    {% endblock %}

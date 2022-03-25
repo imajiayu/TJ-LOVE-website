@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/search.css">
+
+    <style type="text/css">
+        #p1 {
+            font: bolder 24px 楷体;
+        }
+        
+        .h4 {
+            font-family: 楷体;
+        }
+        
+        .h3 {
+            font: color="green"
+        }
+        
+        .h1 {
+            font-family: 楷体;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar navbar-default " style="height:40px">
+        <div class="navbar-header ">
+            <a class="navbar-brand brand-img " href="# ">
+                <img alt="Brand " src="{{ url_for('static',filename='img/TJ.png') }}" class="logo ">
+            </a>
+        </div>
+        <ul class="nav navbar-nav" style="padding-top: 8px;">
+            <li> <a href="{{ url_for('main.index')}}"><span class=" glyphicon glyphicon-home "></span>首页</a></li>
+            <li> <a href="{{ url_for('main.search')}}"><span class=" glyphicon glyphicon-search "></span>搜索</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if current_user.is_authenticated %}
+            <div class="col-lg-2">
+                <li class="dropdown">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 60px ;padding-right:40px ;overflow: hidden; background-color: rgba(255, 255, 255, 0);">
+                        <div class="userimg">
+                            <img alt=" " class="img-circle " src="{{url_for('static',filename=current_user.main_image_url)}}" width="40px " height="40px ">
+                        </div>
+                    </a>
+                    <div class="dropdown-menu pull-right " style="background:  #f0efef;width: 320px;overflow: hidden ">
+                        <div style="margin-top: 16px;border-bottom: 1px solid #e7dae0 ">
+                            <div style="text-align: center ">
+                                <img class="img-circle " src="{{url_for('static',filename=current_user.main_image_url)}}" style="width: 38px;height: 38px; ">
+                            </div>
+                            <div style="color:#802b4e;text-align: center;line-height: 36px;font-size: 15px ">
+                                <span>{{current_user.nickname}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row " style="margin-left: 15px;margin-right: 15px;margin-top: 10px ">
+                            <div class="col-md-4 text-center grid ">
+                                <i class="fa fa-user " style="font-size: 25px;line-height: 45px; "></i>
+                                <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 15px">
+                                    <a href="{{url_for('main.homepage_information',user_id=current_user.id)}}">个人中心</a></p>
+                            </div>
+                            <div class="col-md-4 text-center grid ">
+                                <i class="fa fa-gear " style="font-size: 25px;line-height: 45px; "></i>
+                                <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 15px ">
+                                    <a href="{{url_for('message.receive_message')}}">消息列表</a></p>
+                            </div>
+                            <div class="col-md-4 text-center grid ">
+                                <i class="fa fa-key " style="font-size: 25px;line-height: 45px; "></i>
+                                <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 15px ">
+                                    <a href="{{url_for('auth.change_password')}}">密码修改</a></p>
+                            </div>
+                        </div>
+                        <div class="row " style="margin-top: 20px ">
+                            <div class="text-center " style="padding: 15px;margin: 0px;background: #e7dae0;">
+                                <i class="fa fa-sign-out "></i> <a href="{{url_for('auth.logout')}}">退出账号</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            {% else %}
+            <li> <a href="{{url_for('auth.login')}}" style="padding-right:40px ">登录</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="slide">
+        <div class="overlay">
+            <div class="examples">
+                <form name="search" method="post" action="{{url_for('main.search')}}">
+
+                    <div class="tile">
+                        <p id="p1">搜索意中人</p>
+                        </h1>
+                    </div>
+
+                    <div class="location" id="search1">
+                        <div class=edu>
+                            <h4 class="h4">基本条件</h4>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="gender" id="inputinfo0" class="form-control">
+                          <option selected>{{selected_form.gender}}</option>
+                          <option>不限</option>
+                          <option>女</option>
+                          <option>男</option>
+                        </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="sexuality" id="inputinfo0" class="form-control">
+                         <option selected>{{selected_form.sexuality}}</option>
+                         <option>不限</option>
+                         <option>男</option>
+                         <option>女</option>
+                         <option>双性恋</option>
+                       </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="age_type" id="inputinfo0" class="form-control">
+                         <option selected>{{selected_form.age_type}}</option>
+                         <option>年龄不限</option>
+                         <option>18岁以下</option>
+                         <option>18-25岁</option>
+                         <option>25-30岁</option>
+                         <option>30-40岁</option>
+                         <option>40-50岁</option>
+                         <option>50岁以上</option>
+                       </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="height_type" id="inputinfo1" class="form-control">
+                         <option selected>{{selected_form.height_type}}</option>
+                         <option>身高不限</option>
+                         <option>150及以下</option>
+                         <option>150-160cm</option>
+                         <option>160-170cm</option>
+                         <option>170-180cm</option>
+                         <option>180以上</option>
+                       </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="size" id="inputinfo1" class="form-control">
+                         <option selected>{{selected_form.size}}</option>
+                         <option>体型不限</option>
+                         <option>偏瘦</option>
+                         <option>中等</option>
+                         <option>微胖</option>
+                       </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="income_type" id="inputinfo1" class="form-control">
+                          <option selected>{{selected_form.income_type}}</option>
+                          <option>不限</option>
+                          <option>5000以下</option>
+                          <option>5000-10000</option>
+                          <option>10000-20000</option>
+                          <option>20000-50000</option>
+                          <option>50000以上</option>
+                          <option>马云</option>
+                        </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="Education1">
+
+                        <div class="edu2">
+                            <h4 class="h4">高级搜索</h4>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="education" id="inputinfo3" class="form-control">
+                          <option selected>{{selected_form.education}}</option>
+                          <option>不限</option>
+                          <option>高中及以下</option>
+                          <option>大学本科</option>
+                          <option>硕士生</option>
+                          <option>博士生及以上</option>
+                        </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="occupation" id="inputinfo2" class="form-control ">
+                          <option selected>{{selected_form.occupation}}</option>
+                          <option>不限</option>
+                          <option>程序猿（媛）</option>
+                          <option>教育</option>
+                          <option>医疗</option>
+                          <option>金融</option>
+                          <option>学生</option>
+                          <option>自由职业</option>
+                          <option>美少女</option>
+                          <option>霸道总裁</option>
+                          <option>视频博主</option>
+                          <option>超级英雄</option>
+                          <option>纸片人</option>
+                          <option>冒险者</option>
+                          <option>修仙者</option>
+                          <option>演员</option>
+                          <option>其他</option>
+                        </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="constellation" id="inputinfo2" class="form-control">
+                          <option selected>{{selected_form.constellation}}</option>
+                          <option>星座不限</option>
+                          <option>水瓶座</option>
+                          <option>双鱼座</option>
+                          <option>白羊座</option>
+                          <option>金牛座</option>
+                          <option>双子座</option>
+                          <option>巨蟹座</option>
+                          <option>狮子座</option>
+                          <option>处女座</option>
+                          <option>天秤座</option>                      
+                          <option>天蝎座</option>
+                          <option>射手座</option>
+                          <option>魔羯座</option>
+                        </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <select type="text" name="love_state" id="inputinfo5" class="form-control">
+                          <option selected>{{selected_form.love_state}}</option>
+                          <option>婚姻状况不限</option>
+                          <option>离异</option>
+                          <option>未婚</option>
+                          <option>丧偶</option>
+                        </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button2 form-group">
+                        <div class="col-sm-offset-2 col-sm-10 bububu">
+                            <button type="submit" class="btn btn-default">搜索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="recommend">
+        <h1 class="h1" style="color: rgba(39, 6, 28,0.5);">
+            {%if searched %}
+            <font size=28px;>搜索结果</font>
+            {% else %}
+            <font size=28px;>为您推荐</font>
+            {% endif %}
+        </h1>
+    </div>
+    {% if count>=1 %}
+    <div class="slide1">
+        <div class="overlay1">
+            <div class="headimg">
+                <a href={{url_for( 'main.homepage_information',user_id=users[0].id)}}>
+                    <img src="{{url_for('static',filename=users[0].main_image_url)}}" width=150px height=150px;>
+                </a>
+            </div>
+            <div class="nickname">
+                <h4 class="nickname2">昵称:{{users[0].nickname}}</h4>
+            </div>
+            <div class="gender2">
+                <h4>性别:{{users[0].gender}}</h4>
+            </div>
+            <div class="describe">
+                <h4>自我介绍:</h4>
+                <p>{{users[0].about_me}}</p>
+            </div>
+        </div>
+    </div>
+
+    {% endif %} {% if count>=2 %}
+    <div class="slide2">
+        <div class="overlay1">
+            <a href={{url_for( 'main.homepage_information',user_id=users[1].id)}}>
+                <img src="{{url_for('static',filename=users[1].main_image_url)}}" width=150px height=150px;>
+            </a>
+        </div>
+        <div class="nickname">
+            <h4 class="nickname2">昵称:{{users[1].nickname}}</h4>
+        </div>
+        <div class="gender2">
+            <h4>性别:{{users[1].gender}}</h4>
+        </div>
+        <div class="describe">
+            <h4>自我介绍:</h4>
+            <p>{{users[1].about_me}}</p>
+        </div>
+    </div>
+
+    </div>
+    {% endif %} {% if count>=3 %}
+
+    <div class="slide3">
+        <div class="overlay1">
+            <a href={{url_for( 'main.homepage_information',user_id=users[2].id)}}>
+                <img src="{{url_for('static',filename=users[2].main_image_url)}}" width=150px height=150px;>
+            </a>
+        </div>
+        <div class="nickname">
+            <h4 class="nickname2">昵称:{{users[2].nickname}}</h4>
+        </div>
+        <div class="gender2">
+            <h4>性别:{{users[2].gender}}</h4>
+        </div>
+        <div class="describe">
+            <h4>自我介绍:</h4>
+            <p>{{users[2].about_me}}</p>
+        </div>
+    </div>
+    {% endif %} {% if count>=4 %}
+    <div class="slide4">
+        <div class="overlay1">
+            <a href={{url_for( 'main.homepage_information',user_id=users[3].id)}}>
+                <img src="{{url_for('static',filename=users[3].main_image_url)}}" width=150px height=150px;>
+            </a>
+        </div>
+        <div class="nickname">
+            <h4 class="nickname2">昵称:{{users[3].nickname}}</h4>
+        </div>
+        <div class="gender2">
+            <h4>性别:{{users[3].gender}}</h4>
+        </div>
+        <div class="describe">
+            <h4>自我介绍:</h4>
+            <p>{{users[3].about_me}}</p>
+        </div>
+    </div>
+
+    {% endif %} {% if count>=5 %}
+    <div class="slide5">
+        <div class="overlay1">
+            <a href={{url_for( 'main.homepage_information',user_id=users[4].id)}}>
+                <img src="{{url_for('static',filename=users[4].main_image_url)}}" width=150px height=150px;>
+            </a>
+        </div>
+        <div class="nickname">
+            <h4 class="nickname2">昵称:{{users[4].nickname}}</h4>
+        </div>
+        <div class="gender2">
+            <h4>性别:{{users[4].gender}}</h4>
+        </div>
+        <div class="describe">
+            <h4>自我介绍:</h4>
+            <p>{{users[4].about_me}}</p>
+        </div>
+    </div>
+
+    {% endif %} {% if count>=6 %}
+    <div class="slide6">
+        <div class="overlay1">
+            <a href={{url_for( 'main.homepage_information',user_id=users[5].id)}}>
+                <img src="{{url_for('static',filename=users[5].main_image_url)}}" width=150px height=150px;>
+            </a>
+        </div>
+        <div class="nickname">
+            <h4 class="nickname2">昵称:{{users[5].nickname}}</h4>
+        </div>
+        <div class="gender2">
+            <h4>性别:{{users[5].gender}}</h4>
+        </div>
+        <div class="describe">
+            <h4>自我介绍:</h4>
+            <p>{{users[5].about_me}}</p>
+        </div>
+    </div>
+
+    {% endif %} {% if count>=7 %}
+    <div class="slide7">
+        <div class="overlay1">
+            <a href={{url_for( 'main.homepage_information',user_id=users[4].id)}}>
+                <img src="{{url_for('static',filename=users[6].main_image_url)}}" width=150px height=150px;>
+            </a>
+        </div>
+        <div class="nickname">
+            <h4 class="nickname2">昵称:{{users[6].nickname}}</h4>
+        </div>
+        <div class="gender2">
+            <h4>性别:{{users[6].gender}}</h4>
+        </div>
+        <div class="describe">
+            <h4>自我介绍:</h4>
+            <p>{{users[6].about_me}}</p>
+        </div>
+    </div>
+
+    {% endif %} {% if count>=8 %}
+    <div class="slide8">
+        <div class="overlay1">
+            <a href={{url_for( 'main.homepage_information',user_id=users[7].id)}}>
+                <img src="{{url_for('static',filename=users[7].main_image_url)}}" width=150px height=150px;>
+            </a>
+        </div>
+        <div class="nickname">
+            <h4 class="nickname2">昵称:{{users[7].nickname}}</h4>
+        </div>
+        <div class="gender2">
+            <h4>性别:{{users[7].gender}}</h4>
+        </div>
+        <div class="describe">
+            <h4>自我介绍:</h4>
+            <p>{{users[7].about_me}}</p>
+        </div>
+    </div>
+
+    {% endif %}
+    <div class="page">
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+    <footer class="page-footer" style="position: relative; margin-bottom: 0; ">
+        <div class="footer-bottom">
+            <div class="copyright ">Copyright &copy;世济佳缘 All rights reserved.
+                <a target="_blank" href=""></a>
+            </div>
+            <p>Privacy Policy
+            </p>
+        </div>
+    </footer>
+
+    <script src="../static/js/bubbly-bg.js"></script>
+    <script>
+        bubbly();
+        let configs = [{
+            colorStart: "#fff4e6",
+            colorStop: "#ffe9e4",
+            bubbleFunc: () => `hsla(0, 100%, 50%, ${Math.random() * 0.25})`
+        }, ];
+    </script>
+</body>
+
+</html>

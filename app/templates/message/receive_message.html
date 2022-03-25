@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block title %}接收信息{% endblock %} {% block head %}
+<link rel="stylesheet" href="../static/css/receive_message.css">
+<link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.png') }}" type="image/x-icon">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../static/css/style.css">
+<link rel="stylesheet" href="../../static/css/receive_message.css"> {% endblock %} {% block content %}
+<div class="navigator">
+    <div class="box">
+        <p style="font-size: 50px;"><b>收件箱</b></p>
+    </div>
+</div>
+<div class="overlay" style=" overflow:scroll">
+    {% for message in messages%}
+    <div class="portrait"><img src="{{url_for('static',filename=message.author.main_image_url)}}" width="100px" height="100px"> </div>
+    <div class="message">
+        <p style="font-size:24px" style="font-family: 楷体;color: rgb(221, 75, 190);">{{message.body}}</p>
+    </div>
+    <div>
+        <p><br></p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

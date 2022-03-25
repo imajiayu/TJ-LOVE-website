@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://v.bootstrapmb.com/2020/4/x5s97735/#portfolio -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Personal Portfolio Html5 One Page Template">
+    <meta name="keywords" content="agency, bootstrap, business, corporate, creative, landing page, marketing, multipurpose, product, product launch, responsive, software, startup, startup landing page">
+    <meta name="author" content="ParExcellence">
+    <!-- Site Title -->
+    <title>Halman | Personal Portfolio Html5 One Page Template</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/css/navbar/bootstrap.min.css">
+    <!-- Material Icon -->
+    <link rel="stylesheet" href="../static/css/navbar/materialdesignicons.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="../../static/css/navbar/magnific-popup.css">
+    <!-- Carousel Slider -->
+    <link rel="stylesheet" href="../../static/css/navbar/owl.carousel.css">
+    <!-- Google Fonts -->
+    <link href="../../static/css/navbar/css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../static/css/navbar/style.css">
+
+    <link rel="stylesheet" href="../../static/css/information_css.css">
+
+
+
+
+    <style>
+        .infor {
+            border: 1px;
+            margin: 0 auto;
+            cellpadding: "5";
+            cellspacing: "0";
+        }
+        
+        input.test {
+            background-color: rgb(248, 188, 217);
+            border-radius: 18px;
+            border: 1px solid rgb(171, 225, 247);
+        }
+    </style>
+
+
+
+
+</head>
+
+<body style="overflow-y:visible">
+    <!-- Start Navbar -->
+    <div class="menu-toggler"><span><i class="mdi mdi-menu"></i></span></div>
+    <header>
+        <div class="header-navbar h-100">
+            <a class="navbar-brand" href="{{url_for('main.index')}}">
+                <img style="width:50px;height:50px ;margin-top:20px;margin-left:15px" src="../static/img/favicon.png" />
+                <span><br />首页</span>
+            </a>
+
+            <nav class="navbar menu-list">
+                <ul class="list-group text-center" id="menu">
+                    <li class="list-group-item"><a href="{{url_for('main.homepage_information',user_id=user_id)}}" class="active"><span class="menu-icon mx-auto"><i
+                                        class="mdi mdi-briefcase-outline"></i></span><span>个人信息</span></a></li>
+                    <li class="list-group-item"><a href="{{url_for('main.homepage_photo',user_id=user_id)}}" class=""><span class="menu-icon mx-auto"><i
+                                        class="mdi mdi-account-outline"></i></span><span>照片集</span></a></li>
+                    <li class="list-group-item"><a href="{{url_for('main.homepage_fans',user_id=user_id)}}" class=""><span class="menu-icon mx-auto"><i
+                                        class="mdi mdi-briefcase-outline"></i></span><span>粉丝</span></a></li>
+                    <li class="list-group-item"><a href="{{url_for('main.homepage_notice',user_id=user_id)}}" class=""><span class="menu-icon mx-auto"><i
+                                        class="mdi mdi-grid-large"></i></span><span>关注</span></a></li>
+                    {% if not current_user==user %}
+                    <li class="list-group-item"><a href="{{url_for('message.send_message',recipe_id=user_id)}}" class=""><span class="menu-icon mx-auto"><i
+                                                class="mdi mdi-grid-large"></i></span><span>私信</span></a></li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- End Navbar -->
+
+    <!--显示个人信息的网页-->
+
+
+
+
+
+
+
+
+
+
+
+    <table style="border: 0px ;margin: 0 auto; " width="50%" cellpadding="10" cellspacing="5">
+        <tr>
+            <td id="divcss" colspan="2" style="width: 65%;">
+                <img src="{{url_for('static',filename=user.main_image_url)}}" />
+            </td>
+            <td colspan="2" style="width: 95%;">
+                {% if user==current_user %}
+                <a href="{{url_for('auth.edit_profile')}}">
+                    <button class="btn" type="button">修改信息</button>
+                </a>
+                {% else %}
+                <form action="{{url_for('main.homepage_information',user_id=user_id)}}" method="post" role="form" id="form-test">
+                    <button class="btn" type="submit" id="demo">
+                        {% if have_followed %}
+                        取消关注
+                        {% else %}
+                        关注
+                        {% endif %}
+                    </button>
+                </form>
+                {% endif%}
+            </td>
+
+        </tr>
+        <tr>
+            <td style="width: 35%;">昵称</td>
+            <td>
+                <div style="width:200px" class="text">&ensp;{{user.nickname}}</div>
+            </td>
+            <td style="width: 25%;">性别</td>
+            <td>
+                <div style="width:168px" class="text">&ensp;{{user.gender}}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>身高</td>
+            <td>
+                <div style="width:200px" class="text">&ensp;{{user.height}}</div>
+            </td>
+            <td>体型</td>
+            <td>
+                <div style="width:168px" class="text">&ensp;{{user.size}}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>学历</td>
+            <td>
+                <div style="width:200px" class="text">&ensp;{{user.education}}</div>
+            </td>
+            <td>薪资</td>
+            <td>
+                <div style="width:168px" class="text">&ensp;{{user.salary}}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>生日</td>
+            <td>
+                <div style="width:200px" class="text">&ensp;{{user.date_of_birth}}</div>
+            </td>
+            <td>性取向</td>
+            <td>
+                <div style="width:168px" class="text">&ensp;{{user.sexuality}}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>所在地</td>
+            <td colspan="4">
+                <div style="width:500px" class="text">&ensp;{{user.location}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>自我介绍</td>
+            <td colspan="4">
+                <div style="width:500px ;height:60px;" class="text">&ensp; {{user.about_me}}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>职业</td>
+            <td colspan="4">
+                <div style="width:500px" class="text">&ensp;{{user.occupation}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>情感状况</td>
+            <td colspan="4">
+                <div style="width:500px" class="text">&ensp;{{user.love_state}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>星座</td>
+            <td colspan="4">
+                <div style="width:500px" class="text">&ensp;{{user.constellation}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>联系方式</td>
+            <td colspan="4">
+                <div style="width:500px" class="text">&ensp;{{user.contact_information}}</div>
+            </td>
+        </tr>
+        <script src="../static/js/bubbly-bg.js"></script>
+        <script>
+            bubbly();
+            let configs = [{
+                colorStart: "#fff4e6",
+                colorStop: "#ffe9e4",
+                bubbleFunc: () => `hsla(0, 100%, 50%, ${Math.random() * 0.25})`
+            }];
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

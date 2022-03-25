@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block title %} 上传图片 {% endblock %} {% block content %}
+<div class="overlay">
+    <form method="post" action="{{url_for('main.upload_picture')}}" enctype="multipart/form-data">
+        <div>
+            <input type="file" name="upload_pictures" multiple="multiple" style="width:200px;height: 40px;"></input>
+            <br>
+            <button type="submit" style="background: cornflowerblue; height:40px;width: 60px;border-radius: 8px;">上传</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

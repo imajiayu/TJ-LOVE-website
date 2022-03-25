@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Personal Portfolio Html5 One Page Template">
+    <meta name="keywords" content="agency, bootstrap, business, corporate, creative, landing page, marketing, multipurpose, product, product launch, responsive, software, startup, startup landing page">
+    <meta name="author" content="ParExcellence">
+    <!-- Site Title -->
+    <title>Halman | Personal Portfolio Html5 One Page Template</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/css/navbar/bootstrap.min.css">
+    <!-- Material Icon -->
+    <link rel="stylesheet" href="../../static/css/navbar/materialdesignicons.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="../../static/css/navbar/magnific-popup.css">
+    <!-- Carousel Slider -->
+    <link rel="stylesheet" href="../../static/css/navbar/owl.carousel.css">
+    <!-- Google Fonts -->
+    <link href="../../static/css/navbar/css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../static/css/navbar/style.css">
+    <link rel="stylesheet" href="../../static/css/photo_css.css">
+</head>
+
+<body style="overflow-y:visible">
+    <!-- Start Navbar -->
+    <div class="menu-toggler"><span><i class="mdi mdi-menu"></i></span></div>
+    <header>
+        <div class="header-navbar h-100">
+            <a class="navbar-brand" href="{{url_for('main.index')}}">
+                <img style="width:50px;height:50px ;margin-top:20px;margin-left:15px" src="../static/img/favicon.png" />
+                <span><br />首页</span>
+            </a>
+
+            <nav class="navbar menu-list">
+                <ul class="list-group text-center" id="menu">
+                    <li class="list-group-item"><a href="{{url_for('main.homepage_information',user_id=user_id)}}" class=""><span class="menu-icon mx-auto"><i
+                                                class="mdi mdi-briefcase-outline"></i></span><span>个人信息</span></a></li>
+                    <li class="list-group-item"><a href="{{url_for('main.homepage_photo',user_id=user_id)}}" class="active"><span class="menu-icon mx-auto"><i
+                                                class="mdi mdi-account-outline"></i></span><span>照片集</span></a></li>
+                    <li class="list-group-item"><a href="{{url_for('main.homepage_fans',user_id=user_id)}}" class=""><span class="menu-icon mx-auto"><i
+                                                class="mdi mdi-briefcase-outline"></i></span><span>粉丝</span></a></li>
+                    <li class="list-group-item"><a href="{{url_for('main.homepage_notice',user_id=user_id)}}" class=""><span class="menu-icon mx-auto"><i
+                                                class="mdi mdi-grid-large"></i></span><span>关注</span></a></li>
+                    {% if not current_user==user %}
+                    <li class="list-group-item"><a href="{{url_for('message.send_message',recipe_id=user_id)}}" class=""><span class="menu-icon mx-auto"><i
+                                                class="mdi mdi-grid-large"></i></span><span>私信</span></a></li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- End Navbar -->
+
+    <!--显示照片集的网页-->
+    {% if image_num>=1 %}
+    <div class="divcss1 ">
+        <img src="{{url_for('static',filename=image_list[0])}}" />
+
+
+    </div>
+    {% endif %} {% if image_num>=2 %}
+
+    <div class="divcss2 ">
+        <img src="{{url_for('static',filename=image_list[1])}}" />
+
+
+    </div>
+    {% endif %} {% if image_num>=3 %}
+
+    <div class="divcss3">
+        <img src="{{url_for('static',filename=image_list[2])}}" />
+
+    </div>
+    {% endif%} {% if current_user==user %}
+
+    <a href="{{url_for('main.upload_picture')}}">
+        <button class="btn" type="button">上传照片</button>
+    </a>
+
+    {% endif %} {% if image_num>=4 %}
+    <div class="divcss4">
+        <img src="{{url_for('static',filename=image_list[3])}}" />
+
+    </div>
+    {% endif%} {% if image_num>=5 %}
+    <div class="divcss5">
+        <img src="{{url_for('static',filename=image_list[4])}}" />
+
+    </div>
+    {% endif%} {% if image_num>=6 %}
+    <div class="divcss6">
+        <img src="{{url_for('static',filename=image_list[5])}}" />
+
+    </div>
+    {% endif%}
+
+    <script src="../../static/js/bubbly-bg.js"></script>
+    <script>
+        bubbly();
+        let configs = [{
+            colorStart: "#fff4e6",
+            colorStop: "#ffe9e4",
+            bubbleFunc: () => `hsla(0, 100%, 50%, ${Math.random() * 0.25})`
+        }];
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

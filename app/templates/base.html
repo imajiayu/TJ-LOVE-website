@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %} {% endblock %}</title>
+
+    {% block head %}
+    <!-- icon -->
+    <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.png') }}" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css"> {% endblock %}
+</head>
+
+<body {% block body_pro %} {% endblock %} class="home">
+    <div class="navbar navbar-default " style="height:40px">
+        <div class="navbar-header ">
+            <a class="navbar-brand brand-img " href="# ">
+                <img alt="Brand " src="{{ url_for('static',filename='img/TJ.png') }}" class="logo ">
+            </a>
+        </div>
+        <ul class="nav navbar-nav" style="padding-top: 8px;">
+            <li> <a href="{{ url_for('main.index')}}"><span class=" glyphicon glyphicon-home "></span>首页</a></li>
+            <li> <a href="{{ url_for('main.search')}}"><span class=" glyphicon glyphicon-search "></span>搜索</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if current_user.is_authenticated %}
+            <div class="col-lg-2">
+                <li class="dropdown">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 60px ;padding-right:40px ;overflow: hidden; background-color: rgba(255, 255, 255, 0);">
+                        <div class="userimg">
+                            <img alt=" " class="img-circle " src="{{url_for('static',filename=current_user.main_image_url)}}" width="40px " height="40px ">
+                        </div>
+                    </a>
+                    <div class="dropdown-menu pull-right " style="background:  #f0efef;width: 320px;overflow: hidden ">
+                        <div style="margin-top: 16px;border-bottom: 1px solid #e7dae0 ">
+                            <div style="text-align: center ">
+                                <img class="img-circle " src="{{url_for('static',filename=current_user.main_image_url)}}" style="width: 38px;height: 38px; ">
+                            </div>
+                            <div style="color:#802b4e;text-align: center;line-height: 36px;font-size: 15px ">
+                                <span>{{current_user.nickname}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row " style="margin-left: 15px;margin-right: 15px;margin-top: 10px ">
+                            <div class="col-md-4 text-center grid ">
+                                <i class="fa fa-user " style="font-size: 25px;line-height: 45px; "></i>
+                                <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 15px">
+                                    <a href="{{url_for('main.homepage_information',user_id=current_user.id)}}">个人中心</a></p>
+                            </div>
+                            <div class="col-md-4 text-center grid ">
+                                <i class="fa fa-gear " style="font-size: 25px;line-height: 45px; "></i>
+                                <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 15px ">
+                                    <a href="{{url_for('message.receive_message')}}">消息列表</a></p>
+                            </div>
+                            <div class="col-md-4 text-center grid ">
+                                <i class="fa fa-key " style="font-size: 25px;line-height: 45px; "></i>
+                                <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 15px ">
+                                    <a href="{{url_for('auth.change_password')}}">密码修改</a></p>
+                            </div>
+                        </div>
+                        <div class="row " style="margin-top: 20px ">
+                            <div class="text-center " style="padding: 15px;margin: 0px;background: #e7dae0;">
+                                <i class="fa fa-sign-out "></i> <a href="{{url_for('auth.logout')}}">退出账号</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            {% else %}
+            <div style="padding-top: 23px;">
+                <li> <a href="{{url_for( 'auth.login')}} " style="padding-right:40px ; ">登录</a></li>
+            </div>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="container ">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning ">
+            <button type="button " class="close " data-dismiss="alert ">&times;</button> {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% block content %} {% endblock %} {% block page_footer %}
+    <footer class="page-footer ">
+        <div class="footer-bottom ">
+            <div class="copyright ">Copyright &copy;世济佳缘 All rights reserved.
+                <a target="_blank " href=" "></a>
+            </div>
+            <p>Privacy Policy
+            </p>
+        </div>
+    </footer>
+    {% endblock %}
+    <script src="../static/js/bubbly-bg.js "></script>
+    <script>
+        bubbly();
+        let configs = [{
+            colorStart: "#fff4e6 ",
+            colorStop: "#ffe9e4 ",
+            bubbleFunc: () => `hsla(0, 100%, 50%, ${Math.random() * 0.25})`
+        }];
+    </script>
+</body>
+
+
+{% block page_content %}{% endblock %}
+
+</html>

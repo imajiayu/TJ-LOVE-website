@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="wide=device-width,initial-scale=1,shrink-to-fit=no">
+    <title>修改信息</title>
+    <!-- icon -->
+    <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.png') }}" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/gijao.css">
+    <title>修改信息</title>
+</head>
+
+<body>
+    <div class="navbar navbar-default" style="height:40px;margin-left: 0px;width:1280px;">
+        <div class="navbar-header ">
+            <a class="navbar-brand brand-img " href="# ">
+                <img alt="Brand " src="{{ url_for('static',filename='img/TJ.png') }}" class="logo ">
+            </a>
+        </div>
+        <ul class="nav navbar-nav" style="padding-top: 8px;">
+            <li> <a href="{{ url_for('main.index')}}"><span class=" glyphicon glyphicon-home "></span>首页</a></li>
+            <li> <a href="{{ url_for('main.search')}}"><span class=" glyphicon glyphicon-search "></span>搜索</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if current_user.is_authenticated %}
+            <div class="col-lg-2">
+                <li class="dropdown">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 60px ;padding-right:40px ;overflow: hidden; background-color: rgba(255, 255, 255, 0);">
+                        <div class="userimg">
+                            <img alt=" " class="img-circle " src="{{url_for('static',filename=current_user.main_image_url)}}" width="40px " height="40px ">
+                        </div>
+                    </a>
+                    <div class="dropdown-menu pull-right " style="background:  #f0efef;width: 320px;overflow: hidden ">
+                        <div style="margin-top: 16px;border-bottom: 1px solid #e7dae0 ">
+                            <div style="text-align: center ">
+                                <img class="img-circle " src="{{url_for('static',filename=current_user.main_image_url)}}" style="width: 38px;height: 38px; ">
+                            </div>
+                            <div style="color:#802b4e;text-align: center;line-height: 36px;font-size: 15px ">
+                                <span>{{current_user.nickname}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row " style="margin-left: 15px;margin-right: 15px;margin-top: 10px ">
+                            <div class="col-md-4 text-center grid ">
+                                <i class="fa fa-user " style="font-size: 25px;line-height: 45px; "></i>
+                                <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 15px">
+                                    <a href="{{url_for('main.homepage_information',user_id=current_user.id)}}">个人中心</a></p>
+                            </div>
+                            <div class="col-md-4 text-center grid ">
+                                <i class="fa fa-gear " style="font-size: 25px;line-height: 45px; "></i>
+                                <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 15px ">
+                                    <a href="{{url_for('message.receive_message')}}">消息列表</a></p>
+                            </div>
+                            <div class="col-md-4 text-center grid ">
+                                <i class="fa fa-key " style="font-size: 25px;line-height: 45px; "></i>
+                                <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 15px ">
+                                    <a href="{{url_for('auth.change_password')}}">密码修改</a></p>
+                            </div>
+                        </div>
+                        <div class="row " style="margin-top: 20px ">
+                            <div class="text-center " style="padding: 15px;margin: 0px;background: #e7dae0;">
+                                <i class="fa fa-sign-out "></i> <a href="{{url_for('auth.logout')}}">退出账号</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            {% else %}
+            <li> <a href="{{url_for('auth.login')}}" style="padding-right:40px ">登录</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="box" style="margin-left:400px ;">
+
+        <div class="container">
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="container">
+            <h2>基本信息</h2>
+            <form action="/auth/detailed_information" method="post" role="form" id="form-test" enctype="multipart/form-data">
+                <div style="margin-top: 50px;"><img src="{{url_for('static',filename=current_user.main_image_url)}}" alt="用户头像" class="img-thumbnail rounded" width="200" height="200"></div>
+                <div class="form-group col-md-3">
+                    <label for="submitphoto">上传头像</label>
+                    <input type="file" class="form-control-file subphoto" name="main_image" id="submitphoto">
+                </div>
+                <br></br>
+                <br></br>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="InputName">昵称</label>
+                        <input type="text" class="form-control Name" name="nickname" id="InputName">
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="selectgender">性别</label>
+                        <select type="text" id="selectgender" name="gender" class="form-control gender">
+					  <option selected>保密</option>
+					  <option>男</option>
+					  <option>女</option>
+					</select>
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="datepicker">生日</label>
+                        <div class="card">
+                            <div class="card-body" style="background-color: aliceblue;">
+                                <input type="text" name="date_of_birth" class="form-control datepicker" id="datepicker" placeholder="--请选择--">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <div class="form-row">
+                    <div class="col-sm-2">
+                        <label for="input_province">所在省</label>
+                        <select name="province" id="input_province" class="form-control province">
+								  <option value="">--请选择--</option>
+								  <option>保密</option>
+							  </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="input_city">所在市</label>
+                        <select name="city" id="input_city" class="form-control city">
+								  <option value="">--请选择--</option>
+                              </select>
+                    </div>
+                </div>
+
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="inputlove">取向</label>
+                        <select type="text" id="inputlove" name="sexuality" class="form-control love">
+						<option selected>保密</option>
+						<option>男</option>
+						<option>女</option>
+						<option>双性恋</option>
+					  </select>
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="InputHeight">身高(cm)</label>
+                        <input type="text" name="height" class="form-control height" id="InputHeight">
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="InputWeight">体型</label>
+                        <select type="text" id="InputWeight" name="size" class="form-control weight">
+						<option selected>保密</option>
+						<option>偏瘦</option>
+						<option>中等</option>
+						<option>微胖</option>
+					  </select>
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="inputedu">学历</label>
+                        <select type="text" id="inputedu" name="education" class="form-control edu">
+						<option selected>保密</option>
+						<option>高中及以下</option>
+						<option>大学本科</option>
+						<option>硕士生</option>
+						<option>博士生及以上</option>
+					  </select>
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="InputSalary">薪资</label>
+                        <input type="text" class="form-control salary" name="salary" id="InputSalary" required>
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label for="pre">自我介绍</label>
+                        <textarea class="form-control pre" rows="3" name="about_me" id="pre"></textarea>
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label for="pre">联系方式</label>
+                        <textarea class="form-control pre" rows="3" name="contact_information" id="pre"></textarea>
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <!------------------------------------------------------------->
+                <h2>详细信息</h2>
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="occupation">职业</label>
+                        <select type="text" class="form-control occupation" name="occupation" id="occupation">
+						<option>保密</option>
+						<option>程序猿（媛）</option>
+						<option>教育</option>
+						<option>医疗</option>
+						<option>金融</option>
+						<option>学生</option>
+						<option>自由职业</option>
+						<option>美少女</option>
+						<option>霸道总裁</option>
+						<option>视频博主</option>
+						<option>超级英雄</option>
+						<option>纸片人</option>
+						<option>冒险者</option>
+						<option>修仙者</option>
+						<option>演员</option>
+						<option>其他</option>
+						</select>
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="inputmarriage">感情状况</label>
+                        <select type="text" id="inputmarriage" name="love_state" class="form-control marriage">
+								<option selected>保密</option>
+								<option>未婚</option>
+								<option>离异</option>
+								<option>丧偶</option>
+							  </select>
+                    </div>
+                </div>
+                <!--------------------------------------------------------------->
+                <br></br>
+                <br></br>
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="inputconstellation">星座</label>
+                        <select type="text" id="inputconstellation" name="constellation" class="form-control constellation">
+					<option selected>保密</option>
+					<option>水瓶座</option>
+					<option>双鱼座</option>
+					<option>白羊座</option>
+					<option>金牛座</option>
+					<option>双子座</option>
+					<option>巨蟹座</option>
+					<option>狮子座</option>
+					<option>处女座</option>
+					<option>天秤座</option>
+					<option>天蝎座</option>
+					<option>射手座</option>
+					<option>魔羯座</option>
+				  </select>
+                    </div>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="button2 form-group">
+                    <div class="col-sm-offset-20 col-sm-1">
+                        <button type="submit" class="btn btn-default" style="width:100px;background: #d32c71;color:#ffffff">提交</button>
+                    </div>f
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+    <footer class="page-footer" style="position :relative;bottom:0px;width: 1280px;">
+        <div class="footer-bottom">
+            <div class="copyright ">Copyright &copy;世济佳缘 All rights reserved.
+                <a target="_blank" href=""></a>
+            </div>
+            <p>Privacy Policy
+            </p>
+        </div>
+    </footer>
+    <script src="../../static/js/jquery.js"></script>
+    <script src="../../static/js/popper.js"></script>
+    <script src="../../static/js/bootstrap.js"></script>
+    <script src="../../static/js/gijao.js"></script>
+    <script src="../../static/js/messages.zh-cn.js"></script>
+    <script src="../../static/js/cityAndPro.js"></script>
+    <script src="../../static/js/person.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-pink',
+                radioClass: 'iradio_square-pink',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+    <script>
+        $("#datepicker").datepicker({
+            locale: 'zh-cn',
+            format: 'yyyy-mm-dd',
+            weekStartDay: 1
+        });
+    </script>
+    <script>
+        $(function() {
+            var html = "";
+            var province_idx;
+            $("#input_city").append(html);
+
+            $.each(cityMessage, function(idx, item) {
+                if (item.parid == '1') {
+                    html += "<option value='" + item.regname + "' exid='" + item.regid + "'>" + item.regname + "</option>";
+                }
+            });
+            $("#input_province").append(html);
+            $("#input_province").change(function(e) {
+                var province = $(this).val();
+                var cityList = [];
+                if (province == "") return;
+                $("#input_city option").remove();
+                var html = "<option value=''>--请选择--</option>";
+
+                //					获取已选择的省份的数组下标
+                $.each(cityMessage, function(idx, item) {
+                    if (province == item.regname && item.parid == '1') {
+                        province_idx = idx
+                    }
+                })
+
+                //					获取已选择的省份的城市列表
+                $.each(cityMessage, function(idx, item) {
+                    if (cityMessage[idx].parid == cityMessage[province_idx].regid) {
+                        cityList.push(cityMessage[idx])
+                    }
+                })
+
+                //					添加城市信息给标签
+                if (cityList instanceof Array && cityList.length > 0) {
+                    $.each(cityList, function(idx, item) {
+                        console.log(item)
+                        html += "<option value='" + item.regname + "' exid='" + item.regid + "'>" + item.regname + "</option>";
+
+                    });
+                } else {
+                    html += "<option value='" + cityMessage[province_idx].regname + "' exid='" + cityMessage[province_idx].regid + "'>" + cityMessage[province_idx].regname + "</option>";
+
+                }
+                $("#input_city").append(html);
+            });
+        });
+    </script>
+    <script src="../static/js/bubbly-bg.js"></script>
+    <script>
+        bubbly();
+        let configs = [{
+            colorStart: "#fff4e6",
+            colorStop: "#ffe9e4",
+            bubbleFunc: () => `hsla(0, 100%, 50%, ${Math.random() * 0.25})`
+        }];
+    </script>
+</body>
+
+
+
+</html>
